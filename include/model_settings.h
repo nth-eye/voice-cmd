@@ -20,11 +20,11 @@ constexpr size_t FEATURE_SLICE_DURATION_MS = 30;
 constexpr size_t TENSOR_ARENA_SIZE = 126 * 1024; // ~144 is max before mbed crash and 126 is max before ble crash
 
 enum : uint8_t {
-	SILENCE,
-	UNKNOWN,
-	ON,
-	OFF,
-	N_LABELS // Don't modify, leave at the end of the enum.
+    SILENCE,
+    UNKNOWN,
+    ON,
+    OFF,
+    N_LABELS // Don't modify, leave at the end of the enum.
 };
 
 constexpr const char *LABELS[N_LABELS] = {

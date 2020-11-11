@@ -46,29 +46,29 @@ class RingBuf {
     size_t head = 0;    // First item index / beginning of the buffer.
     size_t tail = 0;    // Last item index.
 
-	class iterator {
-		RingBuf<T, N> &buf;
-		size_t pos;
-	public: 
-		iterator(RingBuf<T, N> &buf_, size_t pos_) : buf(buf_), pos(pos_) {}
+    class iterator {
+        RingBuf<T, N> &buf;
+        size_t pos;
+    public: 
+        iterator(RingBuf<T, N> &buf_, size_t pos_) : buf(buf_), pos(pos_) {}
 
-		T& operator*()  { return buf[pos]; }
-		T* operator->() { return &(operator*()); }
-		iterator& operator++() 
-		{ 
-			if (++pos == N) 
+        T& operator*()  { return buf[pos]; }
+        T* operator->() { return &(operator*()); }
+        iterator& operator++() 
+        { 
+            if (++pos == N) 
                 pos = 0;
-			return *this;
-		}
-		iterator operator++(int) 
-		{   
-			T tmp(*this);
-			operator++();
-			return tmp;
-		}
-		bool operator==(const iterator &other) { return pos == other.pos; }
+            return *this;
+        }
+        iterator operator++(int) 
+        {   
+            T tmp(*this);
+            operator++();
+            return tmp;
+        }
+        bool operator==(const iterator &other) { return pos == other.pos; }
         bool operator!=(const iterator &other) { return !operator==(other); }
-	};
+    };
 public:
     iterator begin()            { return iterator(*this, head); }
     iterator end()              { return iterator(*this, tail); }

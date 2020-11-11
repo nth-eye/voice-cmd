@@ -10,9 +10,9 @@ public:
         : feature_data(feature_data_) 
     {}
 
-	int populate_feature_data(
-		int32_t last_time_in_ms, 
-		int32_t time_in_ms) const;
+    int populate_feature_data(
+        int32_t last_time_in_ms, 
+        int32_t time_in_ms) const;
 private:
     void shift_slices(const size_t slices_to_keep) const;
     
