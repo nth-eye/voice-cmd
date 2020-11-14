@@ -17,7 +17,7 @@ constexpr size_t FEATURE_SLICE_STRIDE_MS = 20;
 constexpr size_t FEATURE_SLICE_DURATION_MS = 30;
 
 // The size of this will depend on the model you're using, and may need to be determined by experimentation.
-constexpr size_t TENSOR_ARENA_SIZE = 30 * 1024; // ~144 is max before mbed crash and 126 is max before ble crash
+constexpr size_t TENSOR_ARENA_SIZE = 30 * 1024;
 
 enum : uint8_t {
     SILENCE,
