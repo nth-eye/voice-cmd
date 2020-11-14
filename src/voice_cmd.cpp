@@ -3,6 +3,7 @@
 
 #include <tensorflow/lite/micro/micro_error_reporter.h>
 #include <tensorflow/lite/micro/micro_mutable_op_resolver.h>
+#include <tensorflow/lite/micro/all_ops_resolver.h>
 #include <tensorflow/lite/version.h>
 
 #include "audio_provider.h"
@@ -84,10 +85,12 @@ void VoiceCmd::on_init(BLE::InitializationCompleteCallbackContext *params)
     // incur some penalty in code space for op implementations that are not
     // needed by this graph.
     static tflite::MicroMutableOpResolver<4> micro_op_resolver(&static_reporter);
+    // if (micro_op_resolver.AddConv2D() != kTfLiteOk) return;
     if (micro_op_resolver.AddDepthwiseConv2D() != kTfLiteOk) return;
     if (micro_op_resolver.AddFullyConnected() != kTfLiteOk) return;
     if (micro_op_resolver.AddSoftmax() != kTfLiteOk) return;
     if (micro_op_resolver.AddReshape() != kTfLiteOk) return;
+    // static tflite::AllOpsResolver micro_op_resolver;
     // Build an interpreter to run the model with.
     static tflite::MicroInterpreter static_interpreter(model, micro_op_resolver, tensor_arena, TENSOR_ARENA_SIZE, &static_reporter);
     interpreter = &static_interpreter;
@@ -202,7 +205,7 @@ void VoiceCmd::inference()
         return;
     }
     
-    printf("CMD: %u [%u] %u \r", cmd.found_command, cmd.score, cmd.is_new);
+    // printf("CMD: %u [%u] %u \r\n", cmd.found_command, cmd.score, cmd.is_new);
     respond(current_time, cmd);
 }
 
@@ -265,7 +268,7 @@ void VoiceCmd::onConnectionComplete(const ble::ConnectionCompleteEvent &event)
     LED_R = LED_G = LED_B = HIGH;
     event_queue.cancel(respond_event);
     if (event.getStatus() == BLE_ERROR_NONE)
-        respond_event = event_queue.call_every(100ms, this, &VoiceCmd::inference);
+        respond_event = event_queue.call_every(200ms, this, &VoiceCmd::inference);
 }
 
 void VoiceCmd::print_mac_address()

@@ -17,8 +17,8 @@ limitations under the License.
 #include <cstring>
 #include <mbed.h>
 
-#include "tensorflow/lite/experimental/microfrontend/lib/frontend.h"
-#include "tensorflow/lite/experimental/microfrontend/lib/frontend_util.h"
+#include <tensorflow/lite/experimental/microfrontend/lib/frontend.h>
+#include <tensorflow/lite/experimental/microfrontend/lib/frontend_util.h>
 
 #include "features_generator.h"
 #include "model_settings.h"

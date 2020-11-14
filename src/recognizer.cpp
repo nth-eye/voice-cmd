@@ -2,7 +2,7 @@
 
 #include "recognizer.h"
 
-const uint8_t Recognizer::thresholds[N_LABELS] = {90, 210, 190, 180};
+const uint8_t Recognizer::thresholds[N_LABELS] = {200, 215, 180, 180};
 
 Array<int32_t, N_LABELS> Recognizer::calculate_average()
 {
